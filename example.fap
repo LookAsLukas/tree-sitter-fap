@@ -1,0 +1,15 @@
+01
+
+automata lol exec
+    A:s, B:f,
+    A--B,
+    A-0-kek.A,
+    B-01-A
+;
+
+
+
+automata kek
+    A, B,
+    A-1-B,
+;

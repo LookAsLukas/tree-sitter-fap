@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "fap",
+      "camelcase": "FAP",
+      "title": "finite-automata-programmer",
+      "scope": "source.fap",
+      "file-types": [
+        "fap"
+      ],
+      "injection-regex": "^fap$",
+      "class-name": "TreeSitterFap"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "DSL for finite automatas",
+    "authors": [
+      {
+        "name": "LookAsLukas",
+        "email": "kolyabetmen231006@gmail.com",
+        "url": "https://github.com/LookAsLukas"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/LookAsLukas/tree-sitter-fap",
+      "funding": "https://github.com/LookAsLukas/tree-sitter-fap"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}
