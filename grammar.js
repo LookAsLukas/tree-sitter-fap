@@ -12,17 +12,23 @@ module.exports = grammar({
 
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => seq(/\w+\n/, repeat($.automata_desc)),
+    source_file: $ => seq($.alphabet, repeat($.automata_desc)),
 
     automata_desc: $ => seq(
-      'automata',
+      $.automata,
       $.name,
-      optional('exec'),
+      optional($.exec),
       $.statements,
       ';'
     ),
 
+    automata: $ => 'automata',
+
     name: $ => /[a-zA-Z][a-zA-Z0-9]*/,
+
+    alphabet: $ => /\w+/,
+
+    exec: $ => 'exec',
 
     statements: $ => seq(
       $.statement,
@@ -36,8 +42,14 @@ module.exports = grammar({
     ),
 
     statement: $ => choice(
-      seq($.name, optional(choice(':s', ':f', ':sf'))),
-      seq($.name, '-', /\w*/, '-', $.name, optional(seq('.', $.name)))
+      seq($.name, optional($.state_spec)),
+      seq($.name, '-', optional($.alphabet), '-', $.name, optional(seq('.', $.name)))
+    ),
+
+    state_spec: $ => choice(
+      ':s',
+      ':f',
+      ':sf'
     )
   }
 });
