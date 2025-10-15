@@ -12,21 +12,24 @@ module.exports = grammar({
 
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => seq($.alphabet, repeat($.automata_desc)),
+    source_file: $ => seq($.alphabet_definition, repeat(seq($.automata_desc, $.semi_colon))),
 
     automata_desc: $ => seq(
       $.automata,
-      $.name,
+      $.automata_name,
       optional($.exec),
       $.statements,
-      ';'
     ),
 
     automata: $ => 'automata',
 
     name: $ => /[a-zA-Z][a-zA-Z0-9]*/,
 
+    automata_name: $ => /[a-zA-Z][a-zA-Z0-9]*/,
+
     alphabet: $ => /\w+/,
+
+    alphabet_definition: $ => /\w+/,
 
     exec: $ => 'exec',
 
@@ -34,22 +37,29 @@ module.exports = grammar({
       $.statement,
       repeat(
         seq(
-          ',',
+          $.comma,
           $.statement
         )
       ),
-      optional(',')
+      optional($.comma)
     ),
 
     statement: $ => choice(
-      seq($.name, optional($.state_spec)),
-      seq($.name, '-', optional($.alphabet), '-', $.name, optional(seq('.', $.name)))
+      seq($.name, optional(seq($.colon, $.state_spec))),
+      seq($.name, $.dash, optional($.alphabet), $.dash, $.automata_name, $.dot, $.name),
+      seq($.name, $.dash, optional($.alphabet), $.dash, $.name)
     ),
 
     state_spec: $ => choice(
-      ':s',
-      ':f',
-      ':sf'
-    )
+      's',
+      'f',
+      'sf'
+    ),
+
+    dash: $ => '-',
+    colon: $ => ':',
+    semi_colon: $ => ';',
+    dot: $ => '.',
+    comma: $ => ','
   }
 });
