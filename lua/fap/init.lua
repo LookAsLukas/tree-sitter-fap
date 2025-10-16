@@ -11,6 +11,8 @@ function M.setup()
     },
     filetype = "fap",
     maintainers = { "LookAsLukas" },
+    generate_requires_npm = false,
+    requires_generate_from_grammar = true,
   }
   
   -- Optional: auto-install the parser
