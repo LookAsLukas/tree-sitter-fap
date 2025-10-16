@@ -1,0 +1,12 @@
+(automata) @keyword
+(alphabet) @string
+(alphabet_definition) @markup.italic
+(automata_name) @attribute
+(name) @type
+(exec) @property
+(state_spec) @lsp.type.interface
+(dash) @punctuation
+(colon) @punctuation
+(semi_colon) @punctuation
+(dot) @punctuation
+(comma) @punctuation
